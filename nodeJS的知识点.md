@@ -1,0 +1,23 @@
+- 模块化：
+  - [x] 系统模块：http，url，fs。
+  - assert：断言测试
+  - buffer：二进制数据
+  - c/c++addons:
+  - child processes:子进程
+  - Crypto：加密(MD5,sha256)
+  - dns:域名解析
+  - domain：舍弃
+  - errors：各种错误提示
+  - events：事件
+  - globals：
+  - net：各种各样的网络操作
+  - os：跟操作系统的信息
+  - path：处理文件路径
+  - stream：流操作
+  - timers：定时器
+  - util：工具类
+  - vm：虚拟机
+  - zlib：压缩操作
+######   nodeJS的模块很多，也很实用。我们会慢慢介绍
+- 模块组成
+- 
