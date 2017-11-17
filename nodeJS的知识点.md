@@ -38,8 +38,25 @@
 2. server.use("url",function(req,res){处理页面的地址
     res.send();
 });通过use来处理用户的处理。req和res中的参数是经过express处理过的(增强版)。send功能改进了。
-3. express中有get,post,use.三种方法。
-4. 
+3. express中有get,post,use.三种方法。use属于通吃，get和post都可以。
+4. express中有很多实用的插件，所谓的中间件。因为有丰富的插件，所以使用者比较多。
+5. 安装express的static的中间件。方便获取静态资源。
+6.数据的获取：get和post数据如何获取： express中有req.query获取到get传过来的信息，不需要任何中间件。
+7. 对于express中post数据，我们是从req.body中得到。需要中间件来辅助获取。
+8. express中的链式操作：需要在回调函数中，声明next，告诉它，我需要链式操作。
+9. next代表下一个步骤。把选择权交给了使用者。
+
+```
+graph LR
+声明next-->使用next
+```
+10. 在链式操作中next声明后，数据中的req的数据是可以传递的.
+11. 当然我们也可以自己去写中间件，用原生的知识去书写自己的中间件。
+12. cookie和session的使用：
+    - [x] 为什么要使用这些。http协议是无状态的.
+    - [x] cookie在浏览器保存一些数据。每次请求都会带过来。
+
+
 
 
 
