@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="http://localhost:8088/" method="post"  enctype="multipart/form-data">
+        上传文件：
+        <!-- <input type="text" name="user" value=""><br> 密码：
+        <input type="password" name="pass" value=""><br> -->
+        <input type="file" name="f1">
+        <input type="submit" value="提交">
+    </form>
+</body>
+
+</html>
