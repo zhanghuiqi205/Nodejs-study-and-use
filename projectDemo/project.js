@@ -1,19 +1,19 @@
-const express = require("express");
-const expressStatic = require('express-static');
-const cookieParser = require('cookie-parser');
-const cookieSession = require('cookie-session');
-const bodyParser = require('body-parser');
-const multer = require("multer");   //上传图片的模块
-const jade = require('jade');
-const ejs = require('ejs');
-const considate =require("consolidate");  //模板引擎的图书馆
-const mysql =require('mysql');
+const express = require("express");                   //express框架的引入
+const expressStatic = require('express-static');      //express静态资源的存放
+const cookieParser = require('cookie-parser');        //解析coolie的数据
+const cookieSession = require('cookie-session');      //解析session的数据
+const bodyParser = require('body-parser');           
+const multer = require("multer");                     //上传图片的模块
+const jade = require('jade');                         //jade模板解析
+const ejs = require('ejs');                           //ejs模板的解析
+const considate =require("consolidate");              //模板引擎的图书馆
+const mysql =require('mysql');                        //MySQL数据库的连接中间件
 
 //连接池
 const db =mysql.createPool({host:"localhost",user:"root",password:"151766",database:"blog"});
 //bodyParser
-var server = express();   //注册服务
-server.listen(8088);      //监听端口
+var server = express();                               //注册服务
+server.listen(8088);                                  //监听端口
 
 //1.解析cookie
 server.use(cookieParser('asfdfa'));
@@ -53,23 +53,56 @@ server.set("view engine","html");
 server.set('views','./template/');
 //使用什么模板引擎：
 server.engine("html",considate.ejs);
-//接受用户的请求
-server.get('/',function(req,res){
-    //你用的什么文件，你需要的数据
-    db.query("SELECT *FROM banner_table;",(err,data)=>{
-       
-        if(err){ 
-           console.log(err);
-           res.status(500).send("database error").end();
-        }else{
-        console.log(data);
-         res.render("index.ejs",{banners:data}); //渲染数据
-        }
-    });  
-}); 
+//5.接受用户的请求(进入首页看到的banner和article渲染)
 
-//5.staic数据
-server.use(expressStatic('./www'));
+server.get('/',function(req,res,next){
+    console.log(req.url);
+    db.query("SELECT *FROM banner_table;",(err,data)=>{    //查询数据库，获得数据
+       console.log(111);
+        if(err){ 
+           res.status(500).send("database error").end();
+        }else{  
+         res.banners = data;
+         next(); 
+        }
+    }); 
+});
+server.get('/',function(req,res,next){
+   db.query("SELECT title,summery,ID FROM article_table;",(err,data)=>{
+         if(err){
+            res.status(500).send("database error").end();  
+        }else{
+           res.news =data;
+           next();
+        }
+   });   
+}); 
+server.get('/',function(req,res){
+    console.log(res.news);
+    res.render("index.ejs",{banners:res.banners,aritcle:res.news}); //渲染数据
+});
+server.get('/news',function(req,res){
+    if(req.query.id){
+      db.query(`SELECT *FROM article_table WHERE ID=${req.query.id}`,(err,data)=>{
+           if(err){
+            res.status(500).send("database error").end(); 
+           }else{
+               if(data.length==0){
+                res.status(404).send("你输入的页面不存在").end(); 
+               }else{
+                   res.render("conText.ejs",{news_data:data[0]});  
+               }
+           }
+      });
+     
+    }else{
+        res.status(404).send("你输入的页面不存在").end();
+    }
+    
+});
+
+//6.staic数据
+server.use(expressStatic('./www'));       //指定静态文件的存在目录
 
 
 

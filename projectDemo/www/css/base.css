@@ -10,7 +10,7 @@ ul,ol,{padding:0;}
 body{ font-size:12px;font-family:"冬青黑体简体中文","微软雅黑","宋体",Arial,sans-serif;}
 a{ text-decoration:none; color:#666666; }
 li{ list-style:none; }
-img{ border:none 0;}
+img{ border:none 0;width: 56px;}
 input{ outline:none; border:none; background:none;}
 input,textarea,select{ margin:0; }					
 input,textarea{ padding:0;}
