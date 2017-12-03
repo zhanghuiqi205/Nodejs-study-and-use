@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<title>智能社-http://www.zhinengshe.com</title>
+	<title>新闻资讯</title>
   	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -55,7 +55,7 @@
     <script src="js/font.js"></script>
     <script>
     	function goBack(){
-			window.history.go(-1);	
+			window.location.href="/";	
 		}
     </script>
 </head>
@@ -70,9 +70,9 @@
 	<div class="header clear"><h2><img src="<%=news_data.author_src%>" alt=""/></h2><p><%=news_data.author %></p></div>
     <div class="cont">
     	<h3><%= news_data.title %></h3>
-        <div class="time"><p>2016-9-25 12:49:16 <span><img src="img/zan.png" alt=""/></span></p></div>
+        <div class="time"><p><%= news_data.sDate %> <span><img src="img/zan.png" alt=""/></span></p></div>
         <div class="text-box">
-            <p><%= news_data.content %></p>
+            <p><%- news_data.content %></p>
         </div>
     </div>
 </div>
@@ -81,8 +81,8 @@
     	<li class="say"><a href="javascript:;">
         	<i></i><span>0</span>
         </a></li>
-    	<li class="zan"><a href="javascript:;">
-        	<i></i><span>0</span>
+    	<li class="zan"><a href="/news?id=<%=news_data.ID %>&act=like">
+        	<i></i><span><%=news_data.n_like%></span>
         </a></li>
     	<li class="xing"><a href="javascript:;">
         	<i><img src="img/xing.png" alt=""/></i>
